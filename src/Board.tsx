@@ -2,7 +2,7 @@ import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import BoardSquare from './BoardSquare'
+import BoardSquare from "./BoardSquare";
 import Knight from "./Knight";
 
 // function handleSquareClick(toX, toY) {
@@ -11,25 +11,36 @@ import Knight from "./Knight";
 //   }
 // }
 
-function renderSquare(i, knightPosition) {
+function renderSquare(i: number, knightPosition: [number, number]) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   return (
-    <div key={i} style={{ width: '12.5%', height: '12.5%', textAlign: "center" }}>
+    <div
+      key={i}
+      style={{ width: "12.5%", height: "12.5%", textAlign: "center" }}
+    >
       <BoardSquare x={x} y={y}>
         {renderPiece(x, y, knightPosition)}
       </BoardSquare>
     </div>
-  )
+  );
 }
 
-function renderPiece(x, y, [knightX, knightY]) {
-    if (x === knightX && y === knightY) {
-      return <Knight />
-    }
+function renderPiece(
+  x: number,
+  y: number,
+  [knightX, knightY]: [number, number]
+) {
+  if (x === knightX && y === knightY) {
+    return <Knight />;
   }
+}
 
-export default function Board({ knightPosition }) {
+export default function Board({
+  knightPosition,
+}: {
+  knightPosition: [number, number];
+}) {
   const squares = [];
   for (let i = 0; i < 64; i++) {
     squares.push(renderSquare(i, knightPosition));
